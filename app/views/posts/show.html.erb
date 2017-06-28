@@ -1,2 +1,6 @@
 <%= @post.title %>
 <%= @post.content%>
+<%= locals: {comment: @post.subtasks.new} %>
+<% @comments.each do |comment| %>
+<% comment.name %>
+<% comment.content %>
