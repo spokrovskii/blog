@@ -1,7 +1,9 @@
-<%= @post.title %>
-<%= @post.content%>
-<% @comments.each do |comment| %>
-<%= comment.name %>
-<%= comment.content %>
-<% end %>
-<%= render :partial => '/comments/new', locals: {comment: @post.comments.new} %>
+<div class="container">
+  <%= @post.title %>
+  <%= @post.content%>
+  <% @comments.each do |comment| %>
+  <%= comment.name %><br>
+  <%= comment.content %><br>
+  <% end %>
+  <%= render :partial => '/comments/new', locals: {comment: @post.comments.new} %>
+</div>
