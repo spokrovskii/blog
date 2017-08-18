@@ -9,9 +9,39 @@
   </head>
 
   <body>
-    <%= yield %>
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>
+  <nav class="navbar navbar-toggleable-md navbar-light bg-faded">
+  <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <a class="navbar-brand" href="#">Blog</a>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav">
+      <% if model_signed_in? %>
+      <li class="nav-item">
+        <%= link_to "#{current_user.username}", edit_model_registration_path(@user)%>
+      </li>
+      <li class="nav-item">
+        <% if current_model.admin? %>
+          <%= link_to "Admin Section", admin_model_path %></li>
+        <% end %>
+      </li>
+      <li class="nav-item">
+        <%= link_to 'Sign Out', destroy_model_session_path, class: 'button', method: 'delete' %>
+      </li>
+      <% else %>
+      <li class="nav-item">
+        <%= link_to 'Sign Up', new_model_registration_path, class: 'button', method: 'get' %>
+      </li>
+      <li class="nav-item">
+          <%= link_to 'Sign In', new_model_session_path, class: 'button', method: 'get' %>
+      </li>
+      <% end %>
+    </ul>
+  </div>
+</nav>
 
-  </body>
+<%= yield %>
+</body>
 </html>
