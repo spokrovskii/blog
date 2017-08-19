@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::Base
-before_action :authenticate_model!, except: [:show]
+before_action :authenticate_user!, except: [:show]
 
   protect_from_forgery with: :exception
   before_action :configure_permitted_parameters, if: :devise_controller?
@@ -21,7 +21,7 @@ before_action :authenticate_model!, except: [:show]
     def check_permissions
       item = model.find(params[:id])
 
-      if !current_model || !current_model.can_modify?(item)
+      if !current_user || !current_user.can_modify?(item)
         flash[:alert] = 'You do not have permission to complete that action.'
         redirect_to root_path
       end

@@ -1,5 +1,11 @@
 class PostsController < ApplicationController
-before_action :authenticate_model!, except: [:index, :show]
+before_action :authenticate_user!, only: [
+                                             :new,
+                                             :create,
+                                             :edit,
+                                             :update,
+                                             :destroy
+                                           ]
 
 before_action :check_permissions, only: [:edit, :update, :destroy]
 
@@ -18,11 +24,11 @@ before_action :check_permissions, only: [:edit, :update, :destroy]
 
   def create
     @post = Post.new(post_params)
-    @post.model = current_model
+
 
     if @post.save
       flash[:success] = 'Пост опубликован'
-     redirect_to @post
+     redirect_to post_path(@post)
     else
       flash[:alert] = 'Извините, возникла ошибка'
       render 'posts/new'
