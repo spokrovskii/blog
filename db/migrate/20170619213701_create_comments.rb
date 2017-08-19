@@ -5,7 +5,7 @@ class CreateComments < ActiveRecord::Migration[5.0]
       t.integer :post_id
       t.integer :user_id
       t.timestamp :created_at
-      t.string :email
+      t.string :email_for_comment
       t.string :name , null: false
     end
   end
